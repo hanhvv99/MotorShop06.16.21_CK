@@ -1,6 +1,8 @@
 package com.example.motorshop.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.motorshop.activity.R;
+import com.example.motorshop.activity.warranty.act.TabActivity;
 import com.example.motorshop.datasrc.Main;
 
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 if(position == 3){
-
+                    /*More*/receiveInfoLoginAndSent(new Intent(getApplicationContext(), TabActivity.class));
                 }
                 if(position == 4){
 
@@ -79,4 +82,13 @@ public class MainActivity extends AppCompatActivity {
         itemList.add(new Main(R.drawable.people, getResources().getString(R.string.people)));
     }
 
+    /*More*/
+    public void receiveInfoLoginAndSent(Intent intent){
+        String getUsr = getIntent().getStringExtra("user");
+        String getPss = getIntent().getStringExtra("pass");
+
+        intent.putExtra("user",getUsr);
+        intent.putExtra("pass",getPss);
+        startActivity(intent);
+    }
 }

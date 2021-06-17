@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.motorshop.activity.R;
+import com.example.motorshop.activity.warranty.act.VerifyRequestActivity;
 import com.example.motorshop.helper.Helper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 pwd = h.getCryptoHash(pwd, "MD5");
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://172.168.86.127:8080/api/motorshop/customers/authen?usn=" + usn + "&pwd=" + pwd;
+                String url = "http://192.168.11.5:8080/api/motorshop/customers/authen?usn=" + usn + "&pwd=" + pwd;
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         response -> {
@@ -62,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                 i.putExtra("userType", "customer");
                                 i.putExtra("id", response);
                                 startActivity(i);
+
+                                /*More*/sendInfoLogin(i);
                             }
                         },
                         error -> {
@@ -70,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 );
                 queue.add(stringRequest);
 
-                url = "http://172.168.86.127:8080/api/motorshop/staffs/authen?usn=" + usn + "&pwd=" + pwd;
+                url = "http://192.168.11.5:8080/api/motorshop/staffs/authen?usn=" + usn + "&pwd=" + pwd;
                 stringRequest = new StringRequest(Request.Method.GET, url,
                         response -> {
                             if (!h.isNull(response)) {
@@ -128,4 +131,10 @@ public class LoginActivity extends AppCompatActivity {
 //                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 //        );
 //    }
+    /*More*/
+    public void sendInfoLogin(Intent intent){
+        intent.putExtra("user",etUsn.getText().toString());
+        intent.putExtra("pass",etPwd.getText().toString());
+        startActivity(intent);
+    }
 }

@@ -78,6 +78,7 @@ public class VerifyActivity extends AppCompatActivity {
     public void gotoMain(){
         if(validOTP() == true){
             startActivity(new Intent(this, MainActivity.class));
+            /*More*/receiveInfoLoginAndSent(new Intent(this, MainActivity.class));
         }
     }
 
@@ -85,5 +86,13 @@ public class VerifyActivity extends AppCompatActivity {
 
         return true;
     }
+    /*More*/
+    public void receiveInfoLoginAndSent(Intent intent){
+        String getUsr = getIntent().getStringExtra("user");
+        String getPss = getIntent().getStringExtra("pass");
 
+        intent.putExtra("user",getUsr);
+        intent.putExtra("pass",getPss);
+        startActivity(intent);
+    }
 }

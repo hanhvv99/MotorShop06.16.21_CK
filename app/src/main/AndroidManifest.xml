@@ -12,9 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.MotorShop">
-
+        android:theme="@style/Theme.MotorShop"
+        android:usesCleartextTraffic="true">
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,15 +21,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".login.VerifyActivity"
+            android:parentActivityName=".login.LoginActivity" />
+        <activity
+            android:name=".main.MainActivity"
+            android:parentActivityName=".login.LoginActivity" />
+        <activity
+            android:name=".warranty.act.TabActivity"
+            android:parentActivityName=".main.MainActivity" />
+        <activity
+            android:name=".warranty.act.ChatWithBotActivity"
+            android:parentActivityName=".warranty.act.TabActivity" />
+        <activity
+            android:name=".warranty.act.ScheduleMaintenanceActivity"
+            android:parentActivityName=".warranty.act.TabActivity" />
+        <activity
+            android:name=".warranty.act.ChooseSPActivity"
+            android:parentActivityName=".warranty.act.ScheduleMaintenanceActivity" />
+        <activity
+            android:name=".warranty.act.VerifyRequestActivity"
+            android:parentActivityName=".warranty.act.ChooseSPActivity" />
 
-        <activity android:name=".login.VerifyActivity"
-            android:parentActivityName=".login.LoginActivity"/>
-
-        <activity android:name=".main.MainActivity"
-            android:parentActivityName=".login.LoginActivity"/>
-
-
-
+        <activity android:name=".warranty.act.CreateAccountMiniActivity"
+            android:parentActivityName=".warranty.act.TabActivity" />
     </application>
 
 </manifest>
