@@ -1,5 +1,8 @@
 package com.example.motorshop.helper;
 
+import android.content.Context;
+import android.view.inputmethod.InputMethodManager;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -160,5 +163,4 @@ public class Helper {
         String str[] = date.split(" ");
         return str[0].toString();
     }
-
 }

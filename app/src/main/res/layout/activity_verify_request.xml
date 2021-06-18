@@ -54,7 +54,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vui lòng nhập đầy đủ thông tin bên dưới để yêu cầu bảo hành:"
+                android:text="Qúy khách vui lòng kiểm tra đầy đủ thông tin bên dưới để yêu cầu bảo hành:"
                 android:textColor="@color/black"
                 android:textSize="15dp"/>
             <TextView
@@ -134,33 +134,19 @@
                 android:background="@drawable/background_shape_edit"
                 android:textColor="#000"
                 android:hint="Input Address"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Nội dung yêu cầu: (Nếu có)"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/EditTextNotes"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
-                android:textSize="15dp"
-                android:maxLines="3"
-                android:inputType="text"
-                android:background="@drawable/background_shape_edit"
-                android:textColor="#000"
-                android:hint="Input Note"/>
 
             <Button
-                android:id="@+id/btnSendInfo"
+                android:id="@+id/btnAddInfo"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:background="@drawable/btn_send"
-                android:text="Yêu cầu bảo hành"/>
+                android:text="Thêm xe để quản lý"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
 
     </ScrollView>

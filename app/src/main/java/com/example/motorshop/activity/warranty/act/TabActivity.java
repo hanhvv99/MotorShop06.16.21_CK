@@ -3,6 +3,7 @@ package com.example.motorshop.activity.warranty.act;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.motorshop.activity.R;
+import com.example.motorshop.activity.login.LoginActivity;
 import com.example.motorshop.activity.warranty.fragment.CaseFragment;
 import com.example.motorshop.activity.warranty.fragment.ContentFragment;
 import com.example.motorshop.activity.warranty.fragment.GetWarrantyFragment;
@@ -84,13 +86,13 @@ public class TabActivity extends AppCompatActivity {
         btnCalander.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Đặt lịch bảo dưỡng", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Thêm xe để quản lý", Toast.LENGTH_LONG).show();
 
                 if(usr == null && pass == null){
                     alerLogError();
                 } else {
                     //luc nay chi xet user va pass dang nhap//chua lay tat cả gia tri
-                    Intent intent = new Intent(getApplicationContext(), ScheduleMaintenanceActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SignupNoticesWarrantyActivity.class);
                     intent.putExtra("user",usr);
                     startActivity(intent);
                 }
@@ -148,10 +150,22 @@ public class TabActivity extends AppCompatActivity {
             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(getApplicationContext(), CreateAccountMiniActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 }
             })
             .setNegativeButton("No",null)
             .show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

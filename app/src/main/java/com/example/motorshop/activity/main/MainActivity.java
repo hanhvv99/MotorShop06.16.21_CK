@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.motorshop.activity.R;
 import com.example.motorshop.activity.warranty.act.TabActivity;
+import com.example.motorshop.activity.warranty.act.WarrantyActivity;
 import com.example.motorshop.datasrc.Main;
+import com.example.motorshop.datasrc.Warranty;
 
 import java.util.ArrayList;
 
@@ -60,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 if(position == 3){
-                    /*More*/receiveInfoLoginAndSent(new Intent(getApplicationContext(), TabActivity.class));
+                    String getUsr = getIntent().getStringExtra("user");
+                    String getPss = getIntent().getStringExtra("pass");
+                    String getID = getIntent().getStringExtra("id");
+                    if(getID.contains("ST")){
+                        /*More*/receiveInfoLoginAndSent(new Intent(getApplicationContext(), WarrantyActivity.class));
+                    }else {
+                        receiveInfoLoginAndSent(new Intent(getApplicationContext(), TabActivity.class));
+                    }
+
                 }
                 if(position == 4){
 
@@ -86,9 +96,11 @@ public class MainActivity extends AppCompatActivity {
     public void receiveInfoLoginAndSent(Intent intent){
         String getUsr = getIntent().getStringExtra("user");
         String getPss = getIntent().getStringExtra("pass");
-
+        String getID = getIntent().getStringExtra("id");
+        System.out.println(getID);
         intent.putExtra("user",getUsr);
         intent.putExtra("pass",getPss);
+        intent.putExtra("id",getID);
         startActivity(intent);
     }
 }

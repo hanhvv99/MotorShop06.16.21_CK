@@ -90,9 +90,11 @@ public class VerifyActivity extends AppCompatActivity {
     public void receiveInfoLoginAndSent(Intent intent){
         String getUsr = getIntent().getStringExtra("user");
         String getPss = getIntent().getStringExtra("pass");
+        String getID = getIntent().getStringExtra("id");
 
         intent.putExtra("user",getUsr);
         intent.putExtra("pass",getPss);
+        intent.putExtra("id",getID);
         startActivity(intent);
     }
 }

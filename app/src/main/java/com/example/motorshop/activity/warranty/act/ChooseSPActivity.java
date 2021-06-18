@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -87,7 +88,7 @@ public class ChooseSPActivity extends AppCompatActivity {
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
 
-                    getValuesInMotorDetail(input);
+                    getFrameNumberAndSentInfoCustomer(input);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"FrameNumber's error",Toast.LENGTH_LONG).show();
@@ -96,58 +97,10 @@ public class ChooseSPActivity extends AppCompatActivity {
         });
     }
 
-    public void getValuesInMotorDetail(String input){
-        ArrayList<MotorDetail> motorDetails = new ArrayList<>();
-
-        String UrlMotorDetails = "http://192.168.11.5:8080/api/motorshop/motorDetails";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest objectRequest = new StringRequest(
-                Request.Method.GET, UrlMotorDetails,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("RestResponse",response.toString());
-                        JSONArray jsonArray = null;
-                        try {
-                            jsonArray = new JSONArray(response.toString());
-                            for (int i=0;i< jsonArray.length();i++){
-                                JSONObject object = jsonArray.getJSONObject(i);
-                                MotorDetail md = new MotorDetail();
-                                md.setId(Integer.parseInt(object.get("id").toString()));
-                                md.setMotorId(Integer.parseInt(object.get("motorId").toString()));
-                                md.setMotorInfoId(Integer.parseInt(object.get("motorInfoId").toString()));
-                                md.setContent(object.get("content").toString());
-                                motorDetails.add(md);
-                            }
-                            for (MotorDetail md : motorDetails){
-                                if(md.getContent().contains(input)){
-                                    if(md.getMotorInfoId() == 1) {
-                                        alerLog(input);
-                                    } else{
-                                        frameNumber.setText("");
-                                        Toast.makeText(getApplicationContext(),"Không có dữ liệu",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("ErrorResponse",error.toString());
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
-    }
-
     public void alerLog(String input){
         new AlertDialog.Builder(this)
-                .setMessage("Số khung quý khách đã nhập có trên hệ thống. Kiểm tra lại chắc chắn số khung này nếu quý khách muốn yếu cầu bảo hành thì hãy bấm vào 'Yêu cầu' bên dưới.")
-                .setPositiveButton("Yêu cầu", new DialogInterface.OnClickListener() {
+                .setMessage("Số khung có tồn tại. Ấn 'Next' để xác minh thông tin.")
+                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getApplicationContext(), VerifyRequestActivity.class);
@@ -211,8 +164,43 @@ public class ChooseSPActivity extends AppCompatActivity {
         requestQueue.add(objectRequest);
     }
 
-    private void getFrameNumberAndSentInfoCustomer(){
-        String URL = "http://192.168.11.5:8080/api/motorshop/motorDetails/getFrameNumber/idmotorInfo?idmotorInfo="+ 1 +"&phone="+getUsr;
+    private void getFrameNumberAndSentInfoCustomer(String input){
+        String UrlFrame = "http://192.168.11.5:8080/api/motorshop/motorDetails/getFrameNumber/idmotorInfo?idmotorInfo="+ 1 +"&phone="+getUsr;
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest objectRequest = new StringRequest(
+                Request.Method.GET, UrlFrame,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("RestResponse",response.toString());
+                        String content = response.toString();
+                        if(content.contains(input)){
+                            alerLog(input);
+                        }else{
+                            frameNumber.setText("");
+                            Toast.makeText(getApplicationContext(),"Không có dữ liệu, kiểm tra lại số khung!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ErrorResponse",error.toString());
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

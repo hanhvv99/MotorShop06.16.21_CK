@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
  */
 public class ChooseSPFragment extends Fragment {
     private FloatingActionButton btnAdd;
+    private ListView lvMotor_of_you;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,12 +39,12 @@ public class ChooseSPFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_choose_s_p,
                 container, false);
 
-        getControl(view);
-        getEvent();
+        setControl(view);
+        setEvent();
         return view;
     }
 
-    private void getEvent() {
+    private void setEvent() {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +54,8 @@ public class ChooseSPFragment extends Fragment {
         });
     }
 
-    private void getControl(View v) {
+    private void setControl(View v) {
+        lvMotor_of_you = (ListView) v.findViewById(R.id.lvMotor_of_you);
         btnAdd = (FloatingActionButton) v.findViewById(R.id.btnAdd);
     }
 
@@ -91,25 +94,5 @@ public class ChooseSPFragment extends Fragment {
                 }
         );
         requestQueue.add(objectRequest);
-    }
-
-    private void getDatas(View v) {
-        System.out.println("test api");
-        String UrlMotor = "http://192.168.1.237:8080/api/motorshop/motors";
-        getData(UrlMotor,v);
-        String UrlMotorInfos = "http://192.168.1.237:8080/api/motorshop/motorInfos";
-        getData(UrlMotorInfos,v);
-        String UrlMotorDetails = "http://192.168.1.237:8080/api/motorshop/motorDetails";
-        getData(UrlMotorDetails,v);
-        String UrlAccessories = "http://192.168.1.237:8080/api/motorshop/accessories";
-        getData(UrlAccessories,v);
-        String UrlBills = "http://192.168.1.237:8080/api/motorshop/bills";
-        getData(UrlBills,v);
-        String UrlBillDetails = "http://192.168.1.237:8080/api/motorshop/billDetails";
-        getData(UrlBillDetails,v);
-        String UrlWarranties = "http://192.168.1.237:8080/api/motorshop/warranties";
-        getData(UrlWarranties,v);
-        String UrlWarrantydetails = "http://192.168.1.237:8080/api/motorshop/warrantydetails";
-        getData(UrlWarrantydetails,v);
     }
 }

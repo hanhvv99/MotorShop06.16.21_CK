@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MotorShop"
         android:usesCleartextTraffic="true">
+        <activity android:name=".warranty.act.WarrantyDetailActivity"></activity>
+        <activity android:name=".warranty.act.SignupNoticesWarrantyActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +29,9 @@
         <activity
             android:name=".main.MainActivity"
             android:parentActivityName=".login.LoginActivity" />
+        <activity
+            android:name=".warranty.act.WarrantyActivity"
+            android:parentActivityName=".main.MainActivity" />
         <activity
             android:name=".warranty.act.TabActivity"
             android:parentActivityName=".main.MainActivity" />
@@ -42,8 +47,8 @@
         <activity
             android:name=".warranty.act.VerifyRequestActivity"
             android:parentActivityName=".warranty.act.ChooseSPActivity" />
-
-        <activity android:name=".warranty.act.CreateAccountMiniActivity"
+        <activity
+            android:name=".warranty.act.CreateAccountMiniActivity"
             android:parentActivityName=".warranty.act.TabActivity" />
     </application>
 

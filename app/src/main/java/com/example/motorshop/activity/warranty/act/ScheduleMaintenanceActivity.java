@@ -1,9 +1,9 @@
 package com.example.motorshop.activity.warranty.act;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -25,6 +25,7 @@ public class ScheduleMaintenanceActivity extends AppCompatActivity {
 
         getControl();
         getEvent();
+        receiveData();
     }
 
     private void getControl() {
@@ -39,5 +40,30 @@ public class ScheduleMaintenanceActivity extends AppCompatActivity {
 
         tabDots.setupWithViewPager(viewPager);
 
+    }
+
+    private void receiveData() {
+        String getUsr = getIntent().getStringExtra("user");
+        String name = getIntent().getStringExtra("name");
+        String identityId = getIntent().getStringExtra("identityId");
+        String address = getIntent().getStringExtra("address");
+        String phone = getIntent().getStringExtra("phone");
+
+        System.out.println(name+","+
+                identityId+","+
+                address+","+
+                phone);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

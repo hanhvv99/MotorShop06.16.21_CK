@@ -62,9 +62,10 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent i = new Intent(getApplicationContext(), VerifyActivity.class);
                                 i.putExtra("userType", "customer");
                                 i.putExtra("id", response);
+                                i.putExtra("user",etUsn.getText().toString());
+                                i.putExtra("pass",etPwd.getText().toString());
                                 startActivity(i);
 
-                                /*More*/sendInfoLogin(i);
                             }
                         },
                         error -> {
@@ -80,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent i = new Intent(getApplicationContext(), VerifyActivity.class);
                                 i.putExtra("userType", "staff");
                                 i.putExtra("id", response);
+                                i.putExtra("user",etUsn.getText().toString());
+                                i.putExtra("pass",etPwd.getText().toString());
                                 startActivity(i);
                             }
                         },
@@ -131,10 +134,5 @@ public class LoginActivity extends AppCompatActivity {
 //                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 //        );
 //    }
-    /*More*/
-    public void sendInfoLogin(Intent intent){
-        intent.putExtra("user",etUsn.getText().toString());
-        intent.putExtra("pass",etPwd.getText().toString());
-        startActivity(intent);
-    }
+
 }

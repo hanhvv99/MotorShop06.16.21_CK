@@ -5,12 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.motorshop.activity.warranty.fragment.CaseFragment;
 import com.example.motorshop.activity.warranty.fragment.ChooseSPFragment;
-import com.example.motorshop.activity.warranty.fragment.ChooseTimeFragment;
-import com.example.motorshop.activity.warranty.fragment.ContentFragment;
-import com.example.motorshop.activity.warranty.fragment.RightsOfCustomersFragment;
-import com.example.motorshop.activity.warranty.fragment.ValidityFragment;
+import com.example.motorshop.activity.warranty.fragment.ReviewInfoProductOfYouFragment;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -25,21 +21,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new ChooseSPFragment();
             case 1:
-                return new ChooseTimeFragment();
-            case 2:
-                return new CaseFragment();
-            case 3:
-                return new RightsOfCustomersFragment();
-            case 4:
-                return new ValidityFragment();
+                return new ReviewInfoProductOfYouFragment();
             default:
-                return new ContentFragment();
+                return new ChooseSPFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 2;
     }
 
     @Nullable
@@ -51,10 +41,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "Chọn xe";
             case 1:
-                return "Chọn thời gian";
-            case 2:
-                return "Chọn dịch vụ";
-            case 3:
                 return "Xem lại";
             default:
                 return "Chọn xe";
