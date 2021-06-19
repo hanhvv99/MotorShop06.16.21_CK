@@ -8,14 +8,17 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.motorshop.activity.R;
+import com.example.motorshop.activity.statistic.PieChartActivity;
 import com.example.motorshop.activity.warranty.act.TabActivity;
 import com.example.motorshop.activity.warranty.act.WarrantyActivity;
 import com.example.motorshop.datasrc.Main;
 import com.example.motorshop.datasrc.Warranty;
+import com.example.motorshop.helper.Helper;
 
 import java.util.ArrayList;
 
@@ -62,18 +65,23 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 if(position == 3){
-                    String getUsr = getIntent().getStringExtra("user");
-                    String getPss = getIntent().getStringExtra("pass");
                     String getID = getIntent().getStringExtra("id");
                     if(getID.contains("ST")){
-                        /*More*/receiveInfoLoginAndSent(new Intent(getApplicationContext(), WarrantyActivity.class));
+                        receiveInfoLoginAndSent(new Intent(getApplicationContext(), WarrantyActivity.class));
                     }else {
                         receiveInfoLoginAndSent(new Intent(getApplicationContext(), TabActivity.class));
                     }
-
                 }
                 if(position == 4){
-
+                    String getID = getIntent().getStringExtra("id");
+                    if(new Helper().isNull(getID)){
+                        Toast.makeText(getApplicationContext(),"Bạn chưa đăng nhập!",Toast.LENGTH_SHORT).show();
+                    }else{
+                        if(!getID.contains("ST")) {
+                            Toast.makeText(getApplicationContext(),"Chỉ dành cho nhân viên",Toast.LENGTH_SHORT).show();
+                        }else
+                            receiveInfoLoginAndSent(new Intent(getApplicationContext(), PieChartActivity.class));
+                    }
                 }
                 if(position == 5){
 

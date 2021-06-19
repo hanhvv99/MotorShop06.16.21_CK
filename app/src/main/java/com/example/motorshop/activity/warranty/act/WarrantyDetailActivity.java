@@ -3,12 +3,8 @@ package com.example.motorshop.activity.warranty.act;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,30 +17,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.motorshop.activity.R;
 import com.example.motorshop.activity.warranty.adapter.ListProductWarrantyAdapter;
-import com.example.motorshop.activity.warranty.adapter.WarrantyAdapter;
-import com.example.motorshop.activity.warranty.utils.ListProductWarranty;
-import com.example.motorshop.datasrc.Warranty;
 import com.example.motorshop.datasrc.WarrantyDetail;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -315,7 +302,7 @@ public class WarrantyDetailActivity extends AppCompatActivity {
                             lvDetail.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                                 @Override
                                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                                    delNoiDung(position);
+                                    delNoiDung(position,arrayList);
                                     return false;
                                 }
                             });
@@ -335,7 +322,7 @@ public class WarrantyDetailActivity extends AppCompatActivity {
         requestQueue.add(oStringRequest);
     }
 
-    public void delNoiDung(int pos){
+    public void delNoiDung(int pos, ArrayList<WarrantyDetail> arr){
         new AlertDialog.Builder(this)
                 .setTitle("Xóa Nội Dung")
                 .setMessage("Bạn có muốn xóa nội dung này không?")
@@ -344,7 +331,7 @@ public class WarrantyDetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(),"xoa",Toast.LENGTH_SHORT).show();
                         callDell(pos);
-                        arrayList.remove(pos);
+                        arr.remove(pos);
                     }
                 })
                 .setNegativeButton("Cancel",null)

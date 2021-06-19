@@ -47,7 +47,7 @@
         android:gravity="center"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btnAddSP"
+            android:id="@+id/btnAdd"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:text="Đăng ký"

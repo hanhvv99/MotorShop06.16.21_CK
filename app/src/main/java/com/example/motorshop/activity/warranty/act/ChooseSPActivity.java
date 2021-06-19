@@ -56,7 +56,6 @@ public class ChooseSPActivity extends AppCompatActivity {
 
     private void getControl() {
         frameNumber = (EditText) findViewById(R.id.frameNumber);
-        btnAddSP = (Button) findViewById(R.id.btnAddSP);
     }
 
     public boolean isValidAddFrameNumber(String frameNum) {
